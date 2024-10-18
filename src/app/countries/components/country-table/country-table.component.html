@@ -22,7 +22,7 @@
                 <td><img [src] = "country.flags.svg" [alt] = "country.flags.alt" /></td>
                 <td>{{country.name.common}}</td>
                 <td>{{country.population}}</td>
-                <td><a href ="#">Ver más</a></td>
+                <td><a [routerLink]="['/countries/by/', country.cca3]">Información</a></td>
             </tr>
         </tbody>
     </table>

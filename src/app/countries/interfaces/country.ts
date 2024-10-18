@@ -1,4 +1,5 @@
 export interface Country {
+    length: number;
     name:         Name;
     tld:          string[];
     cca2:         string;
