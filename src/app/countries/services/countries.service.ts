@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, delay, map, Observable, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({
@@ -16,7 +16,8 @@ export class CountriesService {
 
   private getCountriesRequest(url: string): Observable<Country[]>{
     return this.http.get<Country[]>(url).pipe(
-      catchError(()=> of([]))//Esto se usa para cuando se de un error en la busqueda este reinicie la pestaña y quede de inicio y en consola mostrara el error
+      catchError(()=> of([])),//Esto se usa para cuando se de un error en la busqueda este reinicie la pestaña y quede de inicio y en consola mostrara el error
+      delay(2000),
     );
   }
 
