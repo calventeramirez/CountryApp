@@ -14,6 +14,12 @@ export class CountriesService {
 
   }
 
+  private getCountriesRequest(url: string): Observable<Country[]>{
+    return this.http.get<Country[]>(url).pipe(
+      catchError(()=> of([]))//Esto se usa para cuando se de un error en la busqueda este reinicie la pestaña y quede de inicio y en consola mostrara el error
+    );
+  }
+
   searchCountryByAlphaCode(query:string): Observable<Country | null> {
     const url = this.apiUrl+"/alpha/"+query;
     return this.http.get<Country[]>(url).pipe(
@@ -23,18 +29,16 @@ export class CountriesService {
 
   searchCapital(query: string): Observable<Country[]>{
     const url = this.apiUrl+"/capital/"+query;
-    return this.http.get<Country[]>(url).pipe(
-      catchError(error => of([])) //Esto se usa para cuando se de un error en la busqueda este reinicie la pestaña y quede de inicio y en consola mostrara el error
-    );
+    return this.getCountriesRequest(url);
   }
 
   searchCountry(query: string): Observable<Country[]>{
     const url = this.apiUrl+"/name/"+query;  
-    return this.http.get<Country[]>(url).pipe(catchError(error => of([])));
+    return this.getCountriesRequest(url);
   }
 
   searchRegion(query: string): Observable<Country[]>{
     const url = this.apiUrl+"/region/"+query;
-    return this.http.get<Country[]>(url).pipe(catchError(error => of([])));
+    return this.getCountriesRequest(url);
   }
 }
