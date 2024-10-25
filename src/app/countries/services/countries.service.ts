@@ -17,7 +17,7 @@ export class CountriesService {
   private getCountriesRequest(url: string): Observable<Country[]>{
     return this.http.get<Country[]>(url).pipe(
       catchError(()=> of([])),//Esto se usa para cuando se de un error en la busqueda este reinicie la pestaña y quede de inicio y en consola mostrara el error
-      delay(2000),
+      // delay(2000),
     );
   }
 
