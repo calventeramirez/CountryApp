@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country';
 
@@ -7,11 +7,17 @@ import { Country } from '../../interfaces/country';
     selector: 'app-by-capital-page',
     templateUrl: './by-capital-page.component.html',
 })
-export class ByCapitalPageComponent { 
+export class ByCapitalPageComponent implements OnInit{ 
     public countries: Country[] = [];
     public isLoading: boolean = false;
+    public initialValue:string = "";
 
     constructor(private countriesService: CountriesService){
+    }
+
+    ngOnInit(): void {
+        this.countries = this.countriesService.store.byCapital.countries;
+        this.initialValue =this.countriesService.store.byCapital.term;
     }
 
     searchByCapital(term: string){

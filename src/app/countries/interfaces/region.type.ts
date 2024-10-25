@@ -1,0 +1,1 @@
+export type Regiones = "Africa" | "America" | "Asia" | "Europe" | "Oceania" | "";
